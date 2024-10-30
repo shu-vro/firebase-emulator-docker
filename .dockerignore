@@ -1,0 +1,5 @@
+**/*.log
+.gitignore
+.git
+./firebase/firebase.json
+./firebase/.firebaserc
