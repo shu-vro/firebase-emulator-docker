@@ -114,7 +114,8 @@ docker run --name firebase-emulators \
   -v /path/to/firebase:/firebase \
   -v /path/to/your_backup_directory:/firebase/ \
   -e backup_dir=your_backup_directory \
-  -e EXPORT=true
+  -e EXPORT=true \
+  firebase-emulators
 ```
 
 #### With custom environment variables
@@ -147,6 +148,7 @@ docker run -d --name firebase-emulators \
   -e backup_dir=your_backup_directory \
   -e EXPORT=true \
   -e FIREBASE_DATACONNECT_EMULATOR_URL=postgresql://localhost:5432?sslmode=disable \
+  firebase-emulators
 ```
 
 Don't be scared of the long command. You can prefer to not to use the custom environment variables.
@@ -240,7 +242,8 @@ docker run -d --name firebase-emulators \
   -p 4000:4000 \
   -v /path/to/your_backup_directory:/firebase/ \
   -e backup_dir=your_backup_directory \
-  -e EXPORT=true
+  -e EXPORT=true \
+  firebase-emulators
 ```
 
 > **Long Story short**, providing `backup_dir` environment variable _(MUST BE a valid directory's path)_
@@ -258,4 +261,5 @@ make sure that `your_backup_directory` in volume and environment variable are sa
 ```
 
 Project Files can be found [here](https://github.com/shu-vro/firebase-emulator-docker.git)
+
 # firebase-emulator-docker
