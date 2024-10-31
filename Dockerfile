@@ -27,5 +27,7 @@ RUN firebase setup:emulators:firestore && \
     firebase setup:emulators:database && \
     firebase setup:emulators:pubsub
 
+RUN cd functions && npm install
+
 # Use the entrypoint script to start the emulators
 ENTRYPOINT ["/firebase/entrypoint.sh"]

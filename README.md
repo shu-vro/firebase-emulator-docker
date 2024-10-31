@@ -112,7 +112,7 @@ docker run --name firebase-emulators \
   -p 9499:9499 \
   -p 4000:4000 \
   -v /path/to/firebase:/firebase \
-  -v /path/to/your_backup_directory:/firebase/ \
+  -v /path/to/your_backup_directory:/firebase/your_backup_directory \
   -e backup_dir=your_backup_directory \
   -e EXPORT=true \
   firebase-emulators
@@ -148,7 +148,9 @@ docker run -d --name firebase-emulators \
   -e backup_dir=your_backup_directory \
   -e EXPORT=true \
   -e FIREBASE_DATACONNECT_EMULATOR_URL=postgresql://localhost:5432?sslmode=disable \
+  -v /path/to/your_backup_directory:/firebase/your_backup_directory:rw \
   firebase-emulators
+# if you want to keep a backup. Make sure it exists
 ```
 
 Don't be scared of the long command. You can prefer to not to use the custom environment variables.
@@ -175,7 +177,7 @@ services:
       - 4000:4000
     volumes:
       - /path/to/firebase:/firebase
-      - /path/to/your_backup_directory:/firebase/
+      - /path/to/your_backup_directory:/firebase/your_backup_directory
     environment:
       - backup_dir=your_backup_directory # restore
       - EXPORT=true # Export on Exit. Provide Other than `true` to disable
@@ -201,7 +203,7 @@ services:
       - 4000:4000
     volumes:
       - /path/to/firebase:/firebase:rw
-      - /path/to/your_backup_directory:/firebase/:rw # if you want to keep backup. Make sure it exists
+      - /path/to/your_backup_directory:/firebase/your_backup_directory:rw # if you want to keep backup. Make sure it exists
     environment:
       - GCP_PROJECT=demo-project
       # Omit Environment variables to keep them default
@@ -217,7 +219,8 @@ services:
       - FIREBASE_TASKS_EMULATOR_PORT=9499
       - FIREBASE_UI_EMULATOR_PORT=4000
       - FIREBASE_DATACONNECT_EMULATOR_URL=postgresql://localhost:5432?sslmode=disable
-      - EXPORT=true # Export on Exit. Provide Other than `true` to disable
+      - backup_dir=your_backup_directory # required if you want to keep backup
+      - EXPORT=true # Export on Exit. Provide Other than `true` to disable `backup_dir`
 ```
 
 ### Backup and Restore
@@ -240,14 +243,16 @@ docker run -d --name firebase-emulators \
   -p 9399:9399 \
   -p 9499:9499 \
   -p 4000:4000 \
-  -v /path/to/your_backup_directory:/firebase/ \
-  -e backup_dir=your_backup_directory \
+  -v /path/to/your_backup_directory:/firebase/where_should_backup_save_in_docker \
+  -e backup_dir=where_should_backup_save_in_docker \
   -e EXPORT=true \
   firebase-emulators
 ```
 
-> **Long Story short**, providing `backup_dir` environment variable _(MUST BE a valid directory's path)_
-> will provide a Restore directory and `EXPORT=true` will work as a backup flag
+> **Long Story short**, providing `backup_dir` environment variable
+> will provide a Restore directory and `EXPORT=true` will work as a backup flag.
+
+> **NOTE: the `/path/to/your_backup_directory` must be a valid directory in your system**
 
 > The `EXPORT` will have no effect if `backup_dir` is not provided or mounted
 

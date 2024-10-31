@@ -17,11 +17,6 @@ FIREBASE_DATACONNECT_EMULATOR_PORT=${FIREBASE_DATACONNECT_EMULATOR_PORT:-9399}
 FIREBASE_TASKS_EMULATOR_PORT=${FIREBASE_TASKS_EMULATOR_PORT:-9499}
 FIREBASE_UI_EMULATOR_PORT=${FIREBASE_UI_EMULATOR_PORT:-4000}
 
-# 
-# "functions": {
-#   "port": $FIREBASE_FUNCTIONS_EMULATOR_PORT
-# },
-
 # Check if firebase.json exists
 if [ ! -f /firebase/firebase.json ]; then
   # Generate firebase.json file
@@ -37,9 +32,27 @@ if [ ! -f /firebase/firebase.json ]; then
   "database": {
     "rules": "database.rules.json"
   },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
+  "extensions": {},
   "emulators": {
     "auth": {
       "port": $FIREBASE_AUTH_EMULATOR_PORT,
+      "host": "0.0.0.0"
+    },
+    "functions": {
+      "port": $FIREBASE_FUNCTIONS_EMULATOR_PORT,
       "host": "0.0.0.0"
     },
     "firestore": {

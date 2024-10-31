@@ -3,3 +3,4 @@
 .git
 ./firebase/firebase.json
 ./firebase/.firebaserc
+**/node_modules

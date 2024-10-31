@@ -9,10 +9,27 @@
   "database": {
     "rules": "database.rules.json"
   },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ]
+    }
+  ],
+  "extensions": {},
   "emulators": {
     "auth": {
       "port": 9099,
       "host": "0.0.0.0"
+    },
+    "functions": {
+      "port": 5001
     },
     "firestore": {
       "port": 8080,
