@@ -39,31 +39,40 @@ if [ ! -f /firebase/firebase.json ]; then
   },
   "emulators": {
     "auth": {
-      "port": $FIREBASE_AUTH_EMULATOR_PORT
+      "port": $FIREBASE_AUTH_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "firestore": {
-      "port": $FIREBASE_FIRESTORE_EMULATOR_PORT
+      "port": $FIREBASE_FIRESTORE_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "database": {
-      "port": $FIREBASE_DATABASE_EMULATOR_PORT
+      "port": $FIREBASE_DATABASE_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "hosting": {
-      "port": $FIREBASE_HOSTING_EMULATOR_PORT
+      "port": $FIREBASE_HOSTING_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "pubsub": {
-      "port": $FIREBASE_PUBSUB_EMULATOR_PORT
+      "port": $FIREBASE_PUBSUB_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "storage": {
-      "port": $FIREBASE_STORAGE_EMULATOR_PORT
+      "port": $FIREBASE_STORAGE_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "eventarc": {
-      "port": $FIREBASE_EVENTARC_EMULATOR_PORT
+      "port": $FIREBASE_EVENTARC_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "tasks": {
-      "port": $FIREBASE_TASKS_EMULATOR_PORT
+      "port": $FIREBASE_TASKS_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "ui": {
-      "port": $FIREBASE_UI_EMULATOR_PORT
+      "port": $FIREBASE_UI_EMULATOR_PORT,
+      "host": "0.0.0.0"
     },
     "singleProjectMode": true
   }
