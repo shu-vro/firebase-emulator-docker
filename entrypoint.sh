@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Check if GCP_PROJECT is set
-GCP_PROJECT=${GCP_PROJECT:-"test-project"}
+GCP_PROJECT=${GCP_PROJECT:-"demo-project"}
 FIREBASE_DATACONNECT_EMULATOR_URL=${FIREBASE_DATACONNECT_EMULATOR_URL:-"postgresql://localhost:5432?sslmode=disable"}
 
 # Set default ports if environment variables are not set

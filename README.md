@@ -28,7 +28,7 @@ Default ports for the emulators are:
 
 ```bash
 # Project ID
-GCP_PROJECT=test-project
+GCP_PROJECT=demo-project
 
 # Dataconnect Emulator URL
 FIREBASE_DATACONNECT_EMULATOR_URL=postgresql://localhost:5432?sslmode=disable
@@ -78,6 +78,7 @@ docker run --name firebase-emulators \
   -p 9399:9399 \
   -p 9499:9499 \
   -p 4000:4000 \
+  firebase-emulators
 ```
 
 #### With volume
@@ -131,7 +132,7 @@ docker run -d --name firebase-emulators \
   -p 9399:9399 \
   -p 9499:9499 \
   -p 4000:4000 \
-  -e GCP_PROJECT=test-project \
+  -e GCP_PROJECT=demo-project \
   -e FIREBASE_AUTH_EMULATOR_PORT=9099 \
   -e FIREBASE_FUNCTIONS_EMULATOR_PORT=5001 \
   -e FIREBASE_FIRESTORE_EMULATOR_PORT=8080 \
@@ -200,7 +201,7 @@ services:
       - /path/to/firebase:/firebase:rw
       - /path/to/your_backup_directory:/firebase/:rw # if you want to keep backup. Make sure it exists
     environment:
-      - GCP_PROJECT=test-project
+      - GCP_PROJECT=demo-project
       # Omit Environment variables to keep them default
       - FIREBASE_AUTH_EMULATOR_PORT=9099
       - FIREBASE_FUNCTIONS_EMULATOR_PORT=5001
@@ -255,3 +256,5 @@ make sure that `your_backup_directory` in volume and environment variable are sa
   -e backup_dir=backup \
 ...
 ```
+
+Project Files can be found [here](https://github.com/shu-vro/firebase-emulator-docker.git)

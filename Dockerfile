@@ -12,7 +12,15 @@ WORKDIR /firebase
 COPY entrypoint.sh /firebase/entrypoint.sh
 RUN chmod +x /firebase/entrypoint.sh
 
+COPY firebase/ /firebase/
+
 # Pre-download the necessary .jar files by running the emulators during the build process
+# RUN firebase setup:emulators:firestore
+# RUN firebase setup:emulators:storage
+# RUN firebase setup:emulators:ui
+# RUN firebase setup:emulators:database
+# RUN firebase setup:emulators:pubsub
+
 RUN firebase setup:emulators:firestore && \
     firebase setup:emulators:storage && \
     firebase setup:emulators:ui && \

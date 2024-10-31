@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "test-project"
+    "default": "demo-project"
   },
   "dataconnectEmulatorConfig": {
     "postgres": {
