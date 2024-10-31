@@ -258,3 +258,4 @@ make sure that `your_backup_directory` in volume and environment variable are sa
 ```
 
 Project Files can be found [here](https://github.com/shu-vro/firebase-emulator-docker.git)
+# firebase-emulator-docker
