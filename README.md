@@ -265,6 +265,8 @@ make sure that `your_backup_directory` in volume and environment variable are sa
 ...
 ```
 
-Project Files can be found [here](https://github.com/shu-vro/firebase-emulator-docker.git)
+_backup error:_ While keeping a backup, if you see export error: `denied: requested access to the resource is denied`,
+You have to do a `chmod -R 777 $(pwd)/backup-dir` command to give the docker container access to the directory.
+⚠️ chmod -R 777 gives full access to the directory. Use it with caution.
 
-# firebase-emulator-docker
+[Code](https://github.com/shu-vro/firebase-emulator-docker) - [Issues](https://github.com/shu-vro/firebase-emulator-docker/issues) - [Submit new Issue](https://github.com/shu-vro/firebase-emulator-docker/issues/new)
