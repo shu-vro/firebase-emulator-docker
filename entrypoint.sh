@@ -124,12 +124,13 @@ fi
 
 # Check if EXPORT is set to true and append the --export-on-exit flag if it is
 if [ "$EXPORT" = "true" ]; then
-  if [ -n "$backup_dir" ]; then
+  if [ -n "/firebase/$backup_dir" ]; then
     CMD="$CMD --export-on-exit=/firebase/$backup_dir"
   else
     echo "Warning: EXPORT is set to true but backup_dir is not set."
   fi
 fi
 
+echo "$CMD"
 # Execute the command
 exec $CMD

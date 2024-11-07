@@ -9,8 +9,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 WORKDIR /firebase
 
 # Copy the entrypoint script
-COPY entrypoint.sh /firebase/entrypoint.sh
-RUN chmod +x /firebase/entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 COPY firebase/ /firebase/
 
@@ -30,4 +30,4 @@ RUN firebase setup:emulators:firestore && \
 RUN cd functions && npm install
 
 # Use the entrypoint script to start the emulators
-ENTRYPOINT ["/firebase/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]

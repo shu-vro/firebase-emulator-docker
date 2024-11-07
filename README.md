@@ -7,6 +7,25 @@ This is only for development purposes. Do not use this in production. See here t
 
 Only those people who are familiar with Docker want to use Firebase Emulators in this way (Docker way) should use this image.
 
+## Navigation
+
+- [Firebase Emulators](#firebase-emulators)
+- [Usage](#usage)
+  - [The _Default_ Environment Variables](#the-default-environment-variables)
+    - [With default environment variables](#with-default-environment-variables)
+    - [With volume](#with-volume)
+    - [With custom environment variables](#with-custom-environment-variables)
+    - [In Compose File](#in-compose-file)
+      - [If Volume Provided](#if-volume-provided)
+      - [If Volume _NOT_ Provided](#if-volume-not-provided)
+  - [Backup and Restore](#backup-and-restore)
+  - [Firebase Functions](#firebase-functions)
+  - [Extensions](#extensions)
+- [TroubleShooting](#troubleshooting)
+- [Most recommended Way](#most-recommended-way)
+  - [Folder Structure](#folder-structure)
+  - [Practical Example](#practical-example)
+
 ## Usage
 
 Default ports for the emulators are:
@@ -90,6 +109,7 @@ Example of the `firebase` folder:
 ```
 .
 ├── .firebaserc
+├── your_backup_directory
 ├── database.rules.json (if specified in firebase.json)
 ├── firebase.json
 ├── firestore.indexes.json  (if specified in firebase.json)
@@ -112,7 +132,6 @@ docker run --name firebase-emulators \
   -p 9499:9499 \
   -p 4000:4000 \
   -v /path/to/firebase:/firebase \
-  -v /path/to/your_backup_directory:/firebase/your_backup_directory \
   -e backup_dir=your_backup_directory \
   -e EXPORT=true \
   shirshen/firebase-emulator:latest
@@ -346,6 +365,58 @@ docker run -d --name firebase-emulators \
   -p 9499:9499 \
   -p 4000:4000 \
   -v /path/to/extensions:/firebase/extensions \
+  shirshen/firebase-emulator:latest
+```
+
+## TroubleShooting
+
+1. You all these time, we are sending `extensions`, `functions`, `your-backup-dir`, into the volume. You might face a [common issue](https://stackoverflow.com/questions/55275790/ebusy-resource-busy-or-locked-in-docker-when-trying-to-do-npm-install) similar to this. A best practice would be to make a parent folder and then place the `extensions`, `functions`, `your-backup-dir` inside that parent folder. Then, you can mount the parent folder to the container. remember, the `extensions`, `functions` should be placed inside `/firebase` folder in the container.
+
+## Most recommended Way
+
+_Come to this section after you have read [Usage](#usage) section._
+
+Make a `firebase` folder. run a command inside the folder `firebase init` and follow along. make the `extensions`, `functions`, `your-backup-dir` inside the `firebase` folder. Then, mount the `firebase` folder to the container.
+If you are not using `extensions`, `functions` folder, you might skip it. if you have not planned to hold backup, you might skip it too.
+
+### Folder Structure
+
+```bash
+./firebase
+├── backup-dir
+│   ... whatever lies here
+├── database.rules.json
+├── extensions
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── functions
+│   ├── index.js
+│   ├── package.json
+│   └── package-lock.json
+└── storage.rules
+```
+
+### Practical Example
+
+A practical command should look like this:
+
+```bash
+docker run --rm --name firebase-emulators \
+  -p 9099:9099 \
+  -p 5001:5001 \
+  -p 8080:8080 \
+  -p 9000:9000 \
+  -p 5000:5000 \
+  -p 8085:8085 \
+  -p 9199:9199 \
+  -p 9299:9299 \
+  -p 9399:9399 \
+  -p 9499:9499 \
+  -p 4000:4000 \
+  -v $(pwd)/firebase:/firebase:rw \
+  -e backup_dir=backup-dir \
+  -e EXPORT=true \
   shirshen/firebase-emulator:latest
 ```
 
