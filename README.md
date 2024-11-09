@@ -196,9 +196,8 @@ services:
       - 4000:4000
     volumes:
       - /path/to/firebase:/firebase
-      - /path/to/your_backup_directory:/firebase/your_backup_directory
     environment:
-      - backup_dir=your_backup_directory # restore
+      - backup_dir=your_backup_directory # restore. Assume it exists inside /path/to/firebase directory
       - EXPORT=true # Export on Exit. Provide Other than `true` to disable
 ```
 
@@ -221,7 +220,8 @@ services:
       - 9499:9499
       - 4000:4000
     volumes:
-      - /path/to/firebase:/firebase:rw
+      - /path/to/functions:/firebase/functions:rw # if you are using functions
+      - /path/to/extensions:/firebase/extensions:rw # if you are using extensions
       - /path/to/your_backup_directory:/firebase/your_backup_directory:rw # if you want to keep backup. Make sure it exists
     environment:
       - GCP_PROJECT=demo-project
